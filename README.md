@@ -1,5 +1,5 @@
 # CapsNet
-Tensorflow implementation of capsule network for traffic prediction
+Tensorflow implementation of capsule network for traffic prediction.
 Built with Python 3.5
 
 - Obtain image representation of spatio-temporal traffic speed data (real data of Santander city)
