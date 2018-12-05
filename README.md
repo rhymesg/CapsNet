@@ -1,6 +1,6 @@
 # CapsNet
 Tensorflow implementation of capsule network for traffic prediction.
-Built with Python 3.5
+Built with Python 3.5, TF-slim, numpy, pandas 
 
 - Obtain spatio-temporal image representation of traffic speed data, which are time series data with spatial relationship
 - Compare capsule network (CapsNet) and convolutional neural network (CNN) in a short-term traffic speed forecasting problem
