@@ -1,5 +1,5 @@
 # CapsNet
-Tensorflow implementation of capsule network for traffic prediction.
+Tensorflow implementation of capsule network (CapsNet) for traffic prediction.
 
 Built with Python 3.5, TF-slim, numpy, pandas 
 
