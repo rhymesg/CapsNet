@@ -9,4 +9,4 @@ Built with Python 3.5, TF-slim, numpy, pandas
 
 Please cite the following paper if you find this code helpful:
 
-Youngjoo Kim, Peng Wang, Yifei Zhu, and Lyudmila Mihaylova, "A Capsule Network for Traffic Speed Prediction in Complex Road Networks", in Proceedings of Sensor Data Fusion: Trends, Solutions, and Applications (SDF), Bonn, Germany, Oct 2018.
+Youngjoo Kim, Peng Wang, Yifei Zhu, and Lyudmila Mihaylova, "A Capsule Network for Traffic Speed Prediction in Complex Road Networks", in Proceedings of Sensor Data Fusion: Trends, Solutions, and Applications (SDF), Bonn, Germany, Oct 2018. Available: https://www.researchgate.net/publication/327798102_A_Capsule_Network_for_Traffic_Speed_Prediction_in_Complex_Road_Networks
