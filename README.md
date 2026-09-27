@@ -62,7 +62,7 @@ This trains and then evaluates using the selected CSV, overwriting the configure
 
 ## Development
 
-Use the synthetic commands above for smoke checks. See [verification status](docs/limitations.md#verification-status) for what has actually run; neither the neural smoke path nor the paper's experiments has been reproduced in this documentation update.
+Use the synthetic commands above for smoke checks. See [verification status](docs/limitations.md#verification-status) for what has actually run; neither the neural smoke path nor the paper's experiments has been reproduced.
 
 Report issues through the [issue tracker](https://github.com/rhymesg/CapsNet/issues), including the commit, dependency versions, settings, input dimensions, and traceback or unexpected result. Suggested GitHub description and topics are in [repository metadata](docs/repository-metadata.md).
 
@@ -79,7 +79,7 @@ Report issues through the [issue tracker](https://github.com/rhymesg/CapsNet/iss
 
 Please cite the traffic-prediction paper when using its method:
 
-> Youngjoo Kim, Peng Wang, Yifei Zhu, and Lyudmila Mihaylova. “A Capsule Network for Traffic Speed Prediction in Complex Road Networks.” *2018 Sensor Data Fusion: Trends, Solutions, Applications (SDF)*, 2018. [doi:10.1109/SDF.2018.8547068](https://doi.org/10.1109/SDF.2018.8547068). [Full text, arXiv v2](https://arxiv.org/pdf/1807.10603v2); [institutional publication record](https://eprints.whiterose.ac.uk/id/eprint/134023/); [original README link](https://www.researchgate.net/publication/327798102_A_Capsule_Network_for_Traffic_Speed_Prediction_in_Complex_Road_Networks).
+> Youngjoo Kim, Peng Wang, Yifei Zhu, and Lyudmila Mihaylova. “A Capsule Network for Traffic Speed Prediction in Complex Road Networks.” *2018 Sensor Data Fusion: Trends, Solutions, Applications (SDF)*, 2018. [doi:10.1109/SDF.2018.8547068](https://doi.org/10.1109/SDF.2018.8547068). [Full text, arXiv v2](https://arxiv.org/pdf/1807.10603v2); [institutional publication record](https://eprints.whiterose.ac.uk/id/eprint/134023/); [ResearchGate](https://www.researchgate.net/publication/327798102_A_Capsule_Network_for_Traffic_Speed_Prediction_in_Complex_Road_Networks).
 
 [CITATION.cff](CITATION.cff) identifies the software and provides the paper as the preferred citation. The citation request is separate from license conditions.
 
