@@ -23,7 +23,7 @@ The paper describes removing days with failed sensors and replacing isolated mis
 
 For the `[0, 1]` range, scaling is `(speed - minimum)/(maximum - minimum)` and inverse scaling is `scaled*(maximum - minimum) + minimum`. Constant or nonfinite inputs are unsupported; the scaler does not reject them explicitly.
 
-The default 75% split is by row count, not calendar month. Fitting the scaler before splitting includes evaluation data; see [limitations](../docs/limitations.md#paper-and-code-differences).
+The default 75% split is by row count, not calendar month. Fitting the scaler before splitting includes evaluation data; see [implementation details](../docs/implementation-notes.md#paper-and-code-differences).
 
 ## Provenance and checksums
 
@@ -34,4 +34,4 @@ These are the files at source revision `b1967d2e48b68ef031732f120342203c84314185
 | `Santander_ST_speed_pp_case1.csv` | `eab670674403aba8e7a255c6af111866c278e90f4162650893e162c1dc5a6412` |
 | `Santander_ST_speed_pp_case2.csv` | `34c1624d3acbba965afe25d5161ecb716dc17e9ab5d4fade3bab4bc32e4214d9` |
 
-The [software DOI](https://doi.org/10.15131/shef.data.7424507.v1) links back to GitHub; it is not an independent raw-data archive. Dataset redistribution terms and the upstream data retrieval path remain unresolved; see [license and provenance](../docs/limitations.md#provenance-and-licensing).
+The [software DOI](https://doi.org/10.15131/shef.data.7424507.v1) links back to GitHub; it is not an independent raw-data archive. Dataset redistribution terms and the upstream data retrieval path remain unresolved; see [license and provenance](../docs/implementation-notes.md#provenance-and-licensing).

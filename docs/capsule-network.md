@@ -1,6 +1,6 @@
 # Capsule network reference
 
-This reference maps traffic-speed forecasting concepts to [rhymesg/CapsNet](https://github.com/rhymesg/CapsNet). Read the [paper and related-method citations](../README.md#citation) and [current-code limitations](limitations.md) together with [main_capsnet.py](../main_capsnet.py).
+This reference maps traffic-speed forecasting concepts to [rhymesg/CapsNet](https://github.com/rhymesg/CapsNet). Read the [paper and related-method citations](../README.md#citation) and [source conventions](implementation-notes.md) together with [main_capsnet.py](../main_capsnet.py).
 
 ## Input and output
 
@@ -47,7 +47,7 @@ The output is $\sqrt{\|v_j\|^2+\epsilon}$ for each horizon/sensor pair. It is no
 - `routing` returns `[B, 1, L*N, CAP_caps2_vec_len, 1]`; `CapsNet` removes the singleton axis before computing lengths.
 - `tf.stop_gradient` blocks gradient flow through the intermediate routing predictions; the final weighted sum uses the live predictions.
 - Routing tiles inputs for every output capsule component. Weight count is `M*L*N*N*CAP_caps1_num_filter*CAP_caps2_vec_len`; memory grows quadratically with sensor count, before gradients, optimizer state, and activations.
-- `train` minimizes normalized RMSE with Adam and a per-step exponential learning-rate schedule; [limitations](limitations.md#paper-and-code-differences) explain the loss and metric departures.
+- `train` minimizes normalized RMSE with Adam and a per-step exponential learning-rate schedule; [implementation details](implementation-notes.md#paper-and-code-differences) explain the loss and metric departures.
 
 ## Worked execution path
 

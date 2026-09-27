@@ -19,7 +19,7 @@ Encode road-sensor histories as spatio-temporal images, extract local features, 
 | Traffic histories as images; flattened future speeds | Eqs. (1)–(2), Section II-A | `get_dataset_image`, `get_batch` in [main_capsnet.py](main_capsnet.py); [data](data/README.md) |
 | Convolutions, PrimaryCaps, TrafficCaps | Section II-C, Figure 4, Table II | `CapsNet`, `squash`, `routing`; [algorithm reference](docs/capsule-network.md) |
 | CNN baseline | Section II-B, Figure 3, Table I | `CNN_Ma`; [related work](#related-methods) |
-| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [implementation notes](docs/limitations.md) |
+| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [implementation notes](docs/implementation-notes.md) |
 
 ## Examples
 
@@ -61,13 +61,15 @@ Expected checks and their scope are in the [running guide](docs/running.md#synth
 
 ## Implementation scope
 
-The repository contains CapsNet and CNN model functions, sequence batching, scaling, training, and evaluation. The [implementation notes](docs/limitations.md#paper-and-code-differences) describe routing, optimization, and output-metric conventions for adaptation.
+The repository contains CapsNet and CNN model functions, sequence batching, scaling, training, and evaluation. The [implementation notes](docs/implementation-notes.md#paper-and-code-differences) describe routing, optimization, and output-metric conventions for adaptation.
 
 ### Checks
 
 Use the synthetic commands above to check scaling and, with the legacy environment, network execution. See the [running guide](docs/running.md) for the training workflow and output contract.
 
 ## Citation
+
+For academic attribution, please acknowledge this repository when adapting its code or examples.
 
 Please cite the traffic-prediction paper when using its method:
 
@@ -82,4 +84,4 @@ Please cite the traffic-prediction paper when using its method:
 
 ## License and provenance
 
-The software record labels the project **MIT**, but the checkout has no license file. See [provenance and licensing](docs/limitations.md#provenance-and-licensing) for source attribution and reuse details.
+The software record labels the project **MIT**, but the checkout has no license file. See [provenance and licensing](docs/implementation-notes.md#provenance-and-licensing) for source attribution and reuse details.

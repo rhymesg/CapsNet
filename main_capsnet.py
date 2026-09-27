@@ -220,7 +220,7 @@ def train():
                                   feed_dict={X: x_batch,
                                              Y: y_batch})
                 
-                total_loss_out = scaler.scale_inverse(total_loss_out)
+                total_loss_out = scaler.scale_error_inverse(total_loss_out)
                 
                 loss_res[0, epoch] = epoch
                 loss_res[1, epoch] = total_loss_out
@@ -283,7 +283,7 @@ def evaluate():
                                             feed_dict={X: x_batch,
                                                        Y: y_batch})
                 
-                total_loss_out = scaler.scale_inverse(total_loss_out)
+                total_loss_out = scaler.scale_error_inverse(total_loss_out)
                 truth = scaler.scale_inverse(truth)
                 predicted = scaler.scale_inverse(predicted)
     
@@ -352,7 +352,7 @@ def load_data():
         num_sensor = num_sensor_set
         
     dataset = dataset_read.iloc[:num_data, :num_sensor]
-    assert num_data, num_sensor == dataset.shape
+    assert (num_data, num_sensor) == dataset.shape
     
     dataset = np.array(dataset.values)
     

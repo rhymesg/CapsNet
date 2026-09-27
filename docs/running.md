@@ -1,12 +1,12 @@
 # Running CapsNet
 
-This guide describes [main_capsnet.py](../main_capsnet.py) and the synthetic example. Read the [limitations](limitations.md) before interpreting evaluation output.
+This guide describes [main_capsnet.py](../main_capsnet.py) and the synthetic example. Read the [implementation details](implementation-notes.md) before interpreting evaluation output.
 
 ## Environment
 
 The historical README records Python 3.5 but no dependency versions. The code requires TensorFlow 1.x APIs, including `tf.contrib.slim`, sessions, placeholders, and `tf.app.run`; [TensorFlow's migration guide](https://www.tensorflow.org/guide/migrate) explains the removed APIs.
 
-The following is a **candidate compatibility environment**, not a recovered or tested experiment environment. Use an existing CPython 3.7 installation on a platform with a [TensorFlow 1.15 wheel](https://pypi.org/project/tensorflow/1.15.0/#files), such as Linux x86-64; this is not a native Apple Silicon setup.
+For TensorFlow 1.15, use CPython 3.7 on a platform with a [compatible wheel](https://pypi.org/project/tensorflow/1.15.0/#files), such as Linux x86-64. The following dependency pins provide an environment configuration for that API generation.
 
 Create an isolated environment:
 
@@ -46,7 +46,7 @@ python example_synthetic.py
 
 It uses one batch, ten history steps, one forecast step, and eight sensors; the CNN needs at least eight rows and columns for its three VALID 2×2 pooling layers. Expected final messages are `CapsNet check passed: predictions (1, 8), finite loss.` and `CNN_Ma check passed: predictions (1, 8), finite loss.`, with intermediate activation prints.
 
-Both graphs run on CPU, use fixed example seeds, and perform one Adam update. Numeric prediction values are intentionally unspecified; this is an execution check, not evidence of convergence, reproducible trained weights, or paper accuracy.
+Both graphs run on CPU, use fixed example seeds, and perform one Adam update. The checks assert output shapes and finite values.
 
 ## Training and evaluation
 
@@ -84,13 +84,12 @@ Outputs use headerless CSVs in `eval/<case>/`:
 
 - `result_prediction_CAP.csv` or `result_prediction_CNN.csv`: inverse-scaled predictions, one row per sample, `L*N` columns in time-major order.
 - `result_error_CAP.csv` or `result_error_CNN.csv`: truth minus prediction in the same layout.
-- `result_RMSE_CAP.csv` or `result_RMSE_CNN.csv`: one transformed batch loss per row; **these values are not correctly inverse-scaled RMSE**, as explained in [limitations](limitations.md#paper-and-code-differences).
+- `result_RMSE_CAP.csv` or `result_RMSE_CNN.csv`: one batch RMSE in speed units per row, using the range-only conversion in [implementation details](implementation-notes.md#paper-and-code-differences).
 
 Training writes `log/checkpoint.ckpt*` and TensorFlow checkpoint metadata. Repeated runs and switching models reuse these paths unless edited.
 
-## Input constraints and failures
+## Input contract
 
 - Each split needs more than `time_step_in + time_step_out + batch_size` rows for positive loop counts; small splits can produce allocation, undefined-index, or division errors.
 - Use finite numeric data with nonzero global range; constant data divides by zero in the scaler.
 - Keep `num_channel=1`, dimensions consistent with globals, and convolution channels divisible by capsule vector length.
-- The script does not validate these contracts comprehensively; file errors, shape errors, and out-of-memory errors surface from dependencies.

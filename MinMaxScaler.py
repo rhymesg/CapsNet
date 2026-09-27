@@ -31,3 +31,7 @@ class MinMaxScaler(object):
         data = (scaled - self.feature_range[0]) * (self.Max - self.Min) / (self.feature_range[1] - self.feature_range[0]) + self.Min
 
         return data
+
+    def scale_error_inverse(self, error):
+        """Convert normalized errors to speed units without an offset."""
+        return error * (self.Max - self.Min) / (self.feature_range[1] - self.feature_range[0])
