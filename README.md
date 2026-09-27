@@ -4,9 +4,22 @@
 
 TensorFlow capsule network (CapsNet) and convolutional neural network (CNN) research code for short-term traffic speed prediction from spatio-temporal images of road-sensor time series.
 
-This is the authors' implementation accompanying **“A Capsule Network for Traffic Speed Prediction in Complex Road Networks”** (SDF 2018), identified by its [software record](https://doi.org/10.15131/shef.data.7424507.v1). The [canonical repository](https://github.com/rhymesg/CapsNet) is useful for studying traffic forecasting with dynamic routing; see the [algorithm reference](docs/capsule-network.md), [paper citation](#citation), and [limitations](docs/limitations.md) before adapting it or comparing results.
+This is the authors' implementation accompanying **“A Capsule Network for Traffic Speed Prediction in Complex Road Networks”** (SDF 2018), identified by its [software record](https://doi.org/10.15131/shef.data.7424507.v1). The [canonical repository](https://github.com/rhymesg/CapsNet) is useful for studying traffic forecasting with dynamic routing; see the [algorithm reference](docs/capsule-network.md) and [paper citation](#citation).
 
-## Installation
+## Method
+
+Encode road-sensor histories as spatio-temporal images, extract local features, and use dynamic routing between capsules to form a traffic-speed forecast. The CNN baseline provides a second architecture for the same input representation.
+
+### Algorithms and source
+
+| Concept | Paper location | Implementation or guide |
+|---|---|---|
+| Traffic histories as images; flattened future speeds | Eqs. (1)–(2), Section II-A | `get_dataset_image`, `get_batch` in [main_capsnet.py](main_capsnet.py); [data](data/README.md) |
+| Convolutions, PrimaryCaps, TrafficCaps | Section II-C, Figure 4, Table II | `CapsNet`, `squash`, `routing`; [algorithm reference](docs/capsule-network.md) |
+| CNN baseline | Section II-B, Figure 3, Table I | `CNN_Ma`; [related work](#related-methods) |
+| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [departures](docs/limitations.md) |
+
+## Examples
 
 Clone the repository:
 
@@ -30,8 +43,6 @@ python -m pip install numpy
 
 For neural-network execution, use the separate [legacy environment setup](docs/running.md#environment). TensorFlow 2 is not compatible with the script as written; the proposed TensorFlow 1.15 setup remains unverified.
 
-## Usage
-
 Check scaling and inverse scaling on synthetic speeds without TensorFlow or Santander data:
 
 ```bash
@@ -46,34 +57,13 @@ python example_synthetic.py
 
 Expected checks and their scope are in the [running guide](docs/running.md#synthetic-example). The example writes no checkpoints or evaluation files and does not measure forecasting accuracy.
 
-For the original training/evaluation workflow, first read the [settings, resource costs, and output contract](docs/running.md#training-and-evaluation), then create the checkpoint directory:
+## Implementation scope
 
-```bash
-mkdir -p log
-```
+The repository contains TensorFlow 1-era CapsNet/CNN training and evaluation code plus a NumPy-only scaling example. Neural execution requires `tf.contrib.slim`; the legacy environment has not been verified, and the current routing and reported error metrics have [documented differences](docs/limitations.md#paper-and-code-differences) relevant to adaptation and quantitative comparisons.
 
-Run from the repository root:
+### Checks
 
-```bash
-python main_capsnet.py
-```
-
-This trains and then evaluates using the selected CSV, overwriting the configured checkpoint and result paths. There is no project-specific CLI; settings are module-level constants in [main_capsnet.py](main_capsnet.py).
-
-## Development
-
-Use the synthetic commands above for smoke checks. See [verification status](docs/limitations.md#verification-status) for what has actually run; neither the neural smoke path nor the paper's experiments has been reproduced.
-
-Report issues through the [issue tracker](https://github.com/rhymesg/CapsNet/issues), including the commit, dependency versions, settings, input dimensions, and traceback or unexpected result. Suggested GitHub description and topics are in [repository metadata](docs/repository-metadata.md).
-
-## Algorithms and source
-
-| Concept | Paper location | Implementation or guide |
-|---|---|---|
-| Traffic histories as images; flattened future speeds | Eqs. (1)–(2), Section II-A | `get_dataset_image`, `get_batch` in [main_capsnet.py](main_capsnet.py); [data](data/README.md) |
-| Convolutions, PrimaryCaps, TrafficCaps | Section II-C, Figure 4, Table II | `CapsNet`, `squash`, `routing`; [algorithm reference](docs/capsule-network.md) |
-| CNN baseline | Section II-B, Figure 3, Table I | `CNN_Ma`; [related work](#related-methods) |
-| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [departures](docs/limitations.md) |
+Use the synthetic commands above to check scaling and, with the legacy environment, network execution. See the [running guide](docs/running.md) for the training workflow and output contract.
 
 ## Citation
 

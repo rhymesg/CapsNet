@@ -50,7 +50,19 @@ Both graphs run on CPU, use fixed example seeds, and perform one Adam update. Nu
 
 ## Training and evaluation
 
-Run from the repository root after creating `log/`, as shown in the [README](../README.md#usage). `main` always calls `load_data`, `train`, and `evaluate` in that order; evaluation restores the checkpoint just written by training.
+From the repository root, create the checkpoint directory:
+
+```bash
+mkdir -p log
+```
+
+After reviewing the settings and resource requirements below, start training and evaluation:
+
+```bash
+python main_capsnet.py
+```
+
+`main` always calls `load_data`, `train`, and `evaluate` in that order; evaluation restores the checkpoint just written by training.
 
 | Setting | Meaning |
 |---|---|
