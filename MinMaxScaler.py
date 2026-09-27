@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 
+# Global traffic-speed scaling; contract and provenance: data/README.md.
 import numpy as np
 
 class MinMaxScaler(object):

@@ -1,0 +1,72 @@
+cff-version: 1.2.0
+message: "Please cite the traffic-prediction paper when using its method."
+type: software
+title: "Tensorflow Implementation of Capsule Network for Traffic Prediction"
+authors:
+  - family-names: Kim
+    given-names: Youngjoo
+  - family-names: Wang
+    given-names: Peng
+  - family-names: Zhu
+    given-names: Yifei
+  - family-names: Mihaylova
+    given-names: Lyudmila
+repository-code: "https://github.com/rhymesg/CapsNet"
+url: "https://doi.org/10.15131/shef.data.7424507.v1"
+doi: "10.15131/shef.data.7424507.v1"
+keywords:
+  - capsule network
+  - dynamic routing
+  - traffic speed prediction
+  - spatio-temporal forecasting
+  - TensorFlow
+preferred-citation:
+  type: conference-paper
+  title: "A Capsule Network for Traffic Speed Prediction in Complex Road Networks"
+  authors:
+    - family-names: Kim
+      given-names: Youngjoo
+    - family-names: Wang
+      given-names: Peng
+    - family-names: Zhu
+      given-names: Yifei
+    - family-names: Mihaylova
+      given-names: Lyudmila
+  collection-title: "2018 Sensor Data Fusion: Trends, Solutions, Applications (SDF)"
+  year: 2018
+  doi: "10.1109/SDF.2018.8547068"
+  url: "https://arxiv.org/abs/1807.10603v2"
+references:
+  - type: conference-paper
+    title: "Dynamic Routing Between Capsules"
+    authors:
+      - family-names: Sabour
+        given-names: Sara
+      - family-names: Frosst
+        given-names: Nicholas
+      - family-names: Hinton
+        given-names: Geoffrey E.
+    collection-title: "Advances in Neural Information Processing Systems"
+    year: 2017
+    url: "https://arxiv.org/abs/1710.09829v2"
+  - type: article
+    title: "Learning Traffic as Images: A Deep Convolutional Neural Network for Large-Scale Transportation Network Speed Prediction"
+    authors:
+      - family-names: Ma
+        given-names: Xiaolei
+      - family-names: Dai
+        given-names: Zhuang
+      - family-names: He
+        given-names: Zhengbing
+      - family-names: Ma
+        given-names: Jihui
+      - family-names: Wang
+        given-names: Yong
+      - family-names: Wang
+        given-names: Yunpeng
+    journal: Sensors
+    volume: 17
+    issue: 4
+    start: 818
+    year: 2017
+    doi: "10.3390/s17040818"

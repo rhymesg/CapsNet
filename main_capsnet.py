@@ -7,6 +7,9 @@
     in Proceedings of Sensor Data Fusion: Trends, Solutions, and Applications (SDF), Bonn, Germany, Oct 2018.
 """
 
+# Traffic CapsNet: https://doi.org/10.1109/SDF.2018.8547068
+# Algorithm and departures: docs/capsule-network.md; citations: README.md#citation.
+
 import math
 import os
 import time
@@ -464,7 +467,7 @@ def routing(input, b_IJ):
             'num_capsule' is the number of capsules in PrimaryCaps layer
             'CAP_caps2_num_outputs' is the number of capsules in TrafficCaps layer
     @output
-        A Tensor with shape [batch_size, CAP_caps2_num_outputs, CAP_caps2_vec_len, 1]
+        A Tensor with shape [batch_size, 1, CAP_caps2_num_outputs, CAP_caps2_vec_len, 1]
     Notes:
         u_i represents the vector output of capsule i in the layer l, and
         v_j the vector output of capsule j in the layer l+1.
@@ -491,6 +494,7 @@ def routing(input, b_IJ):
     # In forward, u_hat_stopped = u_hat; in backward, no gradient passed back from u_hat_stopped to u_hat
     u_hat_stopped = tf.stop_gradient(u_hat, name='stop_gradient')
 
+    # TrafficCaps uses unsquashed sums below; see docs/capsule-network.md.
     # routing iteration
     for r_iter in range(CAP_iter_routing):
         with tf.variable_scope('iter_' + str(r_iter)):
