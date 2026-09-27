@@ -6,6 +6,8 @@ TensorFlow capsule network (CapsNet) and convolutional neural network (CNN) rese
 
 This is the authors' implementation accompanying **“A Capsule Network for Traffic Speed Prediction in Complex Road Networks”** (SDF 2018), identified by its [software record](https://doi.org/10.15131/shef.data.7424507.v1). The [canonical repository](https://github.com/rhymesg/CapsNet) is useful for studying traffic forecasting with dynamic routing; see the [algorithm reference](docs/capsule-network.md) and [paper citation](#citation).
 
+For adaptation in another language or neural-network framework, start with the [equations, tensor layouts, and routing procedure](docs/capsule-network.md).
+
 ## Method
 
 Encode road-sensor histories as spatio-temporal images, extract local features, and use dynamic routing between capsules to form a traffic-speed forecast. The CNN baseline provides a second architecture for the same input representation.
@@ -17,7 +19,7 @@ Encode road-sensor histories as spatio-temporal images, extract local features, 
 | Traffic histories as images; flattened future speeds | Eqs. (1)–(2), Section II-A | `get_dataset_image`, `get_batch` in [main_capsnet.py](main_capsnet.py); [data](data/README.md) |
 | Convolutions, PrimaryCaps, TrafficCaps | Section II-C, Figure 4, Table II | `CapsNet`, `squash`, `routing`; [algorithm reference](docs/capsule-network.md) |
 | CNN baseline | Section II-B, Figure 3, Table I | `CNN_Ma`; [related work](#related-methods) |
-| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [departures](docs/limitations.md) |
+| Scaling, optimization, evaluation | Section III, Eqs. (3)–(5) | `load_data`, `train`, `evaluate`, [MinMaxScaler.py](MinMaxScaler.py); [implementation notes](docs/limitations.md) |
 
 ## Examples
 
@@ -33,7 +35,7 @@ Enter its root:
 cd CapsNet
 ```
 
-The original environment used Python 3.5, TensorFlow with `tf.contrib.slim`, NumPy, and pandas; plotting also requires Matplotlib. Exact original dependency versions were not recorded.
+The Python source uses TensorFlow 1.x with `tf.contrib.slim`, NumPy, and pandas; plotting also requires Matplotlib.
 
 For the NumPy-only example, install NumPy in your Python environment:
 
@@ -41,7 +43,7 @@ For the NumPy-only example, install NumPy in your Python environment:
 python -m pip install numpy
 ```
 
-For neural-network execution, use the separate [legacy environment setup](docs/running.md#environment). TensorFlow 2 is not compatible with the script as written; the proposed TensorFlow 1.15 setup remains unverified.
+For neural-network execution, follow the [TensorFlow 1.x environment setup](docs/running.md#environment).
 
 Check scaling and inverse scaling on synthetic speeds without TensorFlow or Santander data:
 
@@ -55,11 +57,11 @@ With the legacy dependencies installed, exercise the actual sequence batching, C
 python example_synthetic.py
 ```
 
-Expected checks and their scope are in the [running guide](docs/running.md#synthetic-example). The example writes no checkpoints or evaluation files and does not measure forecasting accuracy.
+Expected checks and their scope are in the [running guide](docs/running.md#synthetic-example). The example checks scaling, tensor shapes, and a single optimization step using synthetic data.
 
 ## Implementation scope
 
-The repository contains TensorFlow 1-era CapsNet/CNN training and evaluation code plus a NumPy-only scaling example. Neural execution requires `tf.contrib.slim`; the legacy environment has not been verified, and the current routing and reported error metrics have [documented differences](docs/limitations.md#paper-and-code-differences) relevant to adaptation and quantitative comparisons.
+The repository contains CapsNet and CNN model functions, sequence batching, scaling, training, and evaluation. The [implementation notes](docs/limitations.md#paper-and-code-differences) describe routing, optimization, and output-metric conventions for adaptation.
 
 ### Checks
 
